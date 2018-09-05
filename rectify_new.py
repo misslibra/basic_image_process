@@ -12,6 +12,7 @@ hor = 9
 ver = 6
 squareSize = 39
 ###########  give value  two 94--verson:0814 ,time
+### can be given by xml load
 cameraMatrix1 = np.zeros((3, 3))
 cameraMatrix1[0] = [1.4601622710695899e+03, 0., 9.5060348833584487e+02]
 cameraMatrix1[1] = [0., 1.4601622710695899e+03, 5.5663199038169216e+02]
@@ -54,21 +55,6 @@ Q[3] = [0., 0., 4.6101647549769706e-03, 0.]
 
 # roi1 125  63  1773  963
 # roi2 17 50 1777 968
-############  give value
-# rectify_scale = 1 # 0=full crop, 1=no crop
-# R1, R2, P1, P2, Q, roi1, roi2 = cv2.stereoRectify(cameraMatrix1,distCoeffs1,cameraMatrix2,distCoeffs2,image_size,R,T,alpha = rectify_scale)
-###### HARTLEY'S METHOD .use intrinsic parameters of each camera, but compute the rectification transformation directly from the fundamental matrix
-# retval, mask = cv2.findFundamentalMat(np.asarray(img_left_points[0]),np.asarray(img_right_points[0]),cv2.FM_8POINT,0,0)
-# retval, H1, H2 = cv2.stereoRectifyUncalibrated(np.asarray(img_left_points[0]),np.asarray(img_right_points[0]), retval, image_size)
-# # print '===========   R1   =============',R1
-# R1 = inv(cameraMatrix1) * H1 * cameraMatrix1
-# R2 = inv(cameraMatrix2) * H2 * cameraMatrix2
-# # print '===========  new  R1   =============',R1
-# R1 = H1
-# R2 = H2
-# print '==========',H1
-# P1 = cameraMatrix1
-# P2 = cameraMatrix2
 ########  Precompute maps for cv::remap()
 left_maps = cv2.initUndistortRectifyMap(cameraMatrix1, distCoeffs1, R1, P1, (1920, 1080), cv2.CV_16SC2)
 right_maps = cv2.initUndistortRectifyMap(cameraMatrix2, distCoeffs2, R2, P2, (1920, 1080), cv2.CV_16SC2)
